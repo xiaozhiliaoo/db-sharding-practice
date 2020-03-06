@@ -10,6 +10,8 @@
     <modules>
         <module>shard-db-table-rw</module>
         <module>shard-common</module>
+        <module>shard-rw</module>
+        <module>jdbc-shard</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -26,7 +28,8 @@
         <commons-pool2.version>2.6.2</commons-pool2.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <google-guava.version>26.0-jre</google-guava.version>
-        <shardingsphere-jdbc.version>4.0.0</shardingsphere-jdbc.version>
+        <shardingsphere-jdbc.version>4.0.0-RC1</shardingsphere-jdbc.version>
+        <!--        <shardingsphere-jdbc.version>4.0.0</shardingsphere-jdbc.version>-->
         <mybatis.version>2.0.1</mybatis.version>
         <skipTests>true</skipTests>
         <fastjson.version>1.2.60</fastjson.version>

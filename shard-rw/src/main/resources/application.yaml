@@ -1,0 +1,30 @@
+mybatis:
+  config-location: classpath:META-INF/mybatis-config.xml
+server:
+  port: 8084
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  shardingsphere:
+    datasource:
+      master:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: 123456
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://localhost:3306/ds_0?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+        username: root
+      names: master,slave
+      slave:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: 123456
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://localhost:3306/ds_1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+        username: root
+    masterslave:
+      load-balance-algorithm-type: round_robin
+      master-data-source-name: master
+      name: dataSource
+      slave-data-source-names: slave
+    props:
+      sql:
+        show: true
