@@ -1,0 +1,60 @@
+mybatis:
+  config-location: classpath:META-INF/mybatis-config.xml
+server:
+  port: 8084
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  shardingsphere:
+    datasource:
+      master0:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: 123456
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://localhost:3306/ds_0?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+        username: root
+      master0slave:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: 123456
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://localhost:3306/ds0slave?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+        username: root
+      master1:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: 123456
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://localhost:3306/ds_1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+        username: root
+      master1slave:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: 123456
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://localhost:3306/ds1slave?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+        username: root
+      names: master0,master0slave,master1,master1slave
+      config:
+        props:
+          sql:
+            show: true
+    sharding:
+      default-database-strategy:
+        inline:
+          algorithm-expression: ds$->{id % 2}
+          sharding-column: id
+      master-slave-rules:
+        ds0:
+          master-data-source-name: master0
+          slave-data-source-names: master0slave
+        ds1:
+          master-data-source-name: master1
+          slave-data-source-names: master1slave
+      tables:
+        user:
+          actual-data-nodes: ds$->{0..1}.user_$->{0..2}
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+          table-strategy:
+            inline:
+              algorithm-expression: user_$->{id % 3}
+              sharding-column: id
