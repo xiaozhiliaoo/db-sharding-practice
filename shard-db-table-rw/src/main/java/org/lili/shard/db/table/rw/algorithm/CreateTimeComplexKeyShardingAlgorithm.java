@@ -3,6 +3,7 @@ package org.lili.shard.db.table.rw.algorithm;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Range;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.shardingsphere.api.hint.HintManager;
 import org.apache.shardingsphere.api.sharding.complex.ComplexKeysShardingAlgorithm;
 import org.apache.shardingsphere.api.sharding.complex.ComplexKeysShardingValue;
 
@@ -10,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * 自定义分片算法
+ * 自定义分片算法(复合key，也就是多个key分片)
  */
 public class CreateTimeComplexKeyShardingAlgorithm implements ComplexKeysShardingAlgorithm<Date> {
 
