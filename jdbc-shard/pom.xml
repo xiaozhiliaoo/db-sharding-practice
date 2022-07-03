@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-            <version>4.0.0</version>
+            <version>${shardingsphere-jdbc.version}</version>
         </dependency>
 
         <dependency>
